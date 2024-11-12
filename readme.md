@@ -4,7 +4,7 @@ To illustarte architectural characteritics, advantages, and disadvantages of thr
 
 ## Monolithic Architecture
 
-![Monolithic architecture](/design_and_compare_architectural_styles/images/1_monolithic_architecture.png)
+![Monolithic architecture](/images/1_monolithic_architecture.png)
 
 The above illusrated monolithic architecture for e-commerece highlights the following **core functionalities:**
 * User registration and management, that includes user sign-up and login with authentication (via email and password); profile management: update user details, view past orders, etc.; user roles (customer, admin).
@@ -34,7 +34,7 @@ It is worth to note that this design is great for getting started but may need r
 
 Now let's take the basic monolithic architecture for the e-commerse and break it down into the distinct microservices. This style will help to decouple the different functionalities, allowing for independent scaling and development. 
 
-![Microservices architecture](/design_and_compare_architectural_styles/images/2_microservices_architecture.png)
+![Microservices architecture](/images/2_microservices_architecture.png)
 
 We identified the following primary microservices for this specific design. Please note that the list of microservices is not exhausting.
 * User service handles user registration, authentication, and profile management, manages user data (roles, passwords, etc.).
@@ -65,7 +65,7 @@ As we can see that microservices architecture provides long-term growth potentia
 
 Moving further down the path of improving the architectural design, we can identify serverless functions that could benefit microservices.
 
-![Serverless architecture](/design_and_compare_architectural_styles/images/3_serverless_architecture.png)
+![Serverless architecture](/images/3_serverless_architecture.png)
 
 Let's identify some examples of the serverless functions that can benefit microservices:
 * User authentication function - handles login, token generation, and password resets, triggered by API Gateway requests.
