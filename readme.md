@@ -92,10 +92,11 @@ Ideal for tasks with unpredictable or intermittent usage patterns.
 * **Complex integration** - using serverless alongside microservices can lead to more complex integrations and workflows that must be carefully designed to ensure efficient communication and data flow.
 * **Dependency management** - handling dependencies (e.g., libraries) in serverless functions requires packaging them correctly and may lead to larger deployment artifacts.
 Comparison with Microservices
-Microservices allow more granular control over long-running processes and stateful applications. They offer flexibility to use different technology stacks and can be easily containerized.
-Serverless emphasizes simplicity for specific tasks and reduces infrastructure management 
+Microservices allow more granular control over long-running processes and stateful applications. They offer flexibility to use different technology stacks and can be easily containerized. Serverless emphasizes simplicity for specific tasks and reduces infrastructure management 
 
 Introducing serverless architecture can help to optimize resource usage, cost, and operational complexity, but might not be suitable for all application components due to state limitations and execution constraints.
+
+## Comparison monolithic, microservices and serverless architectures
 
 After reviewing specifics of each of the architectural styles, let's make a comparison between them with the focus certain key aspects, such as scalability, development complexity, deployment, maintenance, and cost implications.
 
