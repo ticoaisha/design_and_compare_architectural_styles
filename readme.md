@@ -1,12 +1,12 @@
 # Designing and Comparing Architectural Styles
 
-To illustarte architectural characteritics, advantages, and disadvantages of three architectural styles, we will focus on an e-commerse application. Let's discuss a monolithic architecture first.
+To illustrate architectural characteristics, advantages, and disadvantages of three architectural styles, we will focus on an e-commerce application. Let's discuss a monolithic architecture first.
 
 ## Monolithic architecture
 
-![Monolithic architecture](/design_and_compare_architectural_styles/images/1_monolithic_architecture.png)
+![Monolithic architecture](/images/1_monolithic_architecture.png)
 
-The above picture illusrates monolithic architecture for an e-commerece application and highlights the following **core functionalities:**
+The above illustrated monolithic architecture for e-commerece highlights the following **core functionalities:**
 * User registration and management, that includes user sign-up and login with authentication (via email and password); profile management: update user details, view past orders, etc.; user roles (customer, admin).
 * Product catalog, that includes viewinf products with details such as name, description, price, and category; searching and filtering products by categories, price range, and keywords; admin functionality to add, update, or remove products.
 * Shopping cart, that includes adding / removing products to / from a shopping cart; updating the quantity of products; calculating the total cost including taxes, shipping, etc.
@@ -34,7 +34,7 @@ It is worth to note that this design is great for getting started but may need r
 
 Now let's take the basic monolithic architecture for the e-commerce and break it down into the distinct microservices. This style will help to decouple the different functionalities, allowing for independent scaling and development. 
 
-![Microservices architecture](/design_and_compare_architectural_styles/images/2_microservices_architecture.png)
+![Microservices architecture](/images/2_microservices_architecture.png)
 
 Here identified the following primary microservices for this specific design (please note that the list of microservices presented here is not exhausting).
 * User service handles user registration, authentication, and profile management, manages user data (roles, passwords, etc.).
@@ -52,7 +52,7 @@ One of the goals to introduce microservices architecture for the e-commerce appl
 * **Improved scalability** - each microservice can be scaled independently based on its resource demands. For example, the product service can scale to accommodate high search traffic without affecting other services. Load balancers can be used for individual services to handle spikes in traffic.
 * **Enhanced flexibility** - microservices can be developed, deployed, and maintained independently, enabling faster iteration cycles. It means that different technologies can be used for different microservices based on specific requirements (e.g., faster databases for product catalogs). Also it might be easier to introduce new features or microservices without impacting the entire system.
 
-At the same time microservices architecture has itw own **disadvantages:**
+At the same time microservices architecture has its own **disadvantages:**
 * **Deployment complexity** - managing deployments for multiple microservices can be challenging, especially with dependencies between services. That is why solutions, like containerization (Docker) and orchestration tools (Kubernetes) are often necessary for smooth deployments.
 * **Development challenges** - microservices need well-defined interfaces (APIs) for communication, requiring careful design and versioning to avoid breaking changes. Developers must consider inter-service communication (e.g., REST) and error handling mechanisms.
 * **Data consistency** - distributed data models can lead to consistency issues, especially when transactions span multiple microservices. That is why there could be a need in the eventual consistency models, distributed transaction patterns (e.g., Saga pattern), and ensuring services are loosely coupled.
@@ -65,7 +65,7 @@ As we can see that microservices architecture provides long-term growth potentia
 
 Moving further down the path of improving the architectural design, we can identify serverless functions that could benefit microservices.
 
-![Serverless architecture](/design_and_compare_architectural_styles/images/3_serverless_architecture.png)
+![Serverless architecture](/images/3_serverless_architecture.png)
 
 Let's identify some examples of these functions applicable to the e-commerce applicaiton:
 * User authentication function - handles login, token generation, and password resets, triggered by API Gateway requests.
@@ -74,12 +74,10 @@ Let's identify some examples of these functions applicable to the e-commerce app
 * Order notification function - sends notifications or emails when triggered by changes in order status.
 * Payment processing function - processes payments when triggered by an order creation event from the order service.
 
-Please note the position of the serverless layer in the above diagram, as it does not fit between the microservices layer and the data layer. Instead, it acts as a supporting layer alongside the microservices. Serverless functions interact with both the API Gateway and the microservices as needed. They are triggered by specific events or requests (e.g., user actions, events from microservices like order creation, etc.) but do not replace or act as an intermediary layer between microservices and databases. The serverless layer operates independently but works in conjunction with the microservices to handle specific tasks or processes. Serverless layer closely interacts with other components:
-* **API Gateway** - serverless functions can be triggered directly by the API Gateway for specific functions, such as user authentication or other event-driven workflows.
-* **Microservices** - serverless functions can respond to events emitted by the microservices (e.g., an order completion event triggers an order notification function).
-* **Data layer** - serverless functions can directly access data storage (e.g., reading/writing to databases) if needed, but this is typically done for event-driven tasks or isolated operations.
-
-Serverless architecture has its own advantages and disadvantages, that are worth to know and consider while choosing an architectural style.
+Please note the position of the serverless layer in the above diagram, as it does not fit between the microservices layer and the data layer. Instead, it acts as a supporting layer alongside the microservices. Serverless functions interact with both the API Gateway and the microservices as needed. They are triggered by specific events or requests (e.g., user actions, events from microservices like order creation, etc.) but do not replace or act as an intermediary layer between microservices and databases. The serverless Layer operates independently but works in conjunction with the microservices to handle specific tasks or processes. Serverless layer closely interacts with other components:
+* **With the API Gateway** - serverless functions can be triggered directly by the API Gateway for specific functions such as user authentication or other event-driven workflows.
+* **With Microservices** - serverless functions can respond to events emitted by the microservices (e.g., an order completion event triggers an order notification function).
+* **With Data Layer** - serverless functions can directly access data storage (e.g., reading/writing to databases) if needed, but this is typically done for event-driven tasks or isolated operations.
 
 **The key benefits of the serverless architecture are:**
 * **Scalability** - serverless functions automatically scale based on demand, accommodating spikes in traffic without manual intervention.
