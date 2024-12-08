@@ -1,19 +1,19 @@
 # Designing and Comparing Architectural Styles
 
-To illustrate architectural characteristics, advantages, and disadvantages of three architectural styles, we will focus on an e-commerce application. Let's discuss a monolithic architecture first.
+To illustrate architectural characteristics, advantages, and disadvantages of different architectural styles, we will focus on an e-commerce application. Let's discuss a monolithic architecture first.
 
 ## Monolithic architecture
 
 ![Monolithic architecture](/images/1_monolithic_architecture.png)
 
-The above illustrated monolithic architecture for e-commerece highlights the following **core functionalities:**
+The above illustrated monolithic architecture for an e-commerece highlights the following **core functionalities:**
 * User registration and management, that includes user sign-up and login with authentication (via email and password); profile management: update user details, view past orders, etc.; user roles (customer, admin).
-* Product catalog, that includes viewinf products with details such as name, description, price, and category; searching and filtering products by categories, price range, and keywords; admin functionality to add, update, or remove products.
-* Shopping cart, that includes adding / removing products to / from a shopping cart; updating the quantity of products; calculating the total cost including taxes, shipping, etc.
+* Product catalog, that includes view products information with details, such as name, description, price, and category; searching and filtering products by categories, price range, and keywords; admin functionality to add, update, or remove products.
+* Shopping cart, that includes adding / removing products to / from a shopping cart; updating the quantity of the products; calculating the total cost including taxes, shipping, etc.
 * Order processing, that includes checkout process (capture shipping information and payment details); order confirmation and status tracking; payment integration.
 
 High-level architecture diagram is represented by the following **layers:**
-* **UI layer (web UI / front-end)** built with technologies, like HTML/CSS, JavaScript, or a front-end framework (React, Angular etc.). This layer handles user interactions, forms, navigation, etc.
+* **UI layer (web UI / front-end)** built with technologies, like HTML / CSS, JavaScript, or a front-end framework (React, Angular etc.). This layer handles user interactions, forms, navigation, etc.
 * **Business logic / back-end layer (application server)** built with Node.js, Python (Django/Flask), or another web framework. This layer handles business logic: user authentication, cart operations, product management, etc., as well as APIs for data fetching and processing.
 * **Data interface layer (database)** could be a relational database (e.g., PostgreSQL, MySQL) or a NoSQL database (e.g., MongoDB). It stores user information, products, orders, cart data, etc.
 
@@ -32,7 +32,7 @@ It is worth to note that this design is great for getting started but may need r
 
 ## Microservices architecture
 
-Now let's take the basic monolithic architecture for the e-commerce and break it down into the distinct microservices. This style will help to decouple the different functionalities, allowing for independent scaling and development. 
+Let's take the basic monolithic architecture for the e-commerce and break it down into the distinct microservices. This style will help to decouple the different functionalities, allowing for independent scaling and development. 
 
 ![Microservices architecture](/images/2_microservices_architecture.png)
 
@@ -45,12 +45,12 @@ Here identified the following primary microservices for this specific design (pl
 
 High-level architecture diagram is represented by the following **layers:**
 * **UI layer (front-end)** interfaces with the API Gateway to interact with various services.
-* **API Gateway** acts as a single entry point for client requests, routing them to appropriate microservices and handling cross-cutting concerns (authentication, logging, etc.).
+* **API Gateway** acts as a single entry point for client requests, routing them to the appropriate microservices and handling cross-cutting concerns (authentication, logging, etc.).
 * **Microservices:** each service manages a distinct set of business functions and has its own database to maintain data independence and optimized queries.
 
 One of the goals to introduce microservices architecture for the e-commerce application is to overcome scalability and flexibility issues identified above for the monolithic architecture. So the **advantages of the microservices architecture** are the following:
 * **Improved scalability** - each microservice can be scaled independently based on its resource demands. For example, the product service can scale to accommodate high search traffic without affecting other services. Load balancers can be used for individual services to handle spikes in traffic.
-* **Enhanced flexibility** - microservices can be developed, deployed, and maintained independently, enabling faster iteration cycles. It means that different technologies can be used for different microservices based on specific requirements (e.g., faster databases for product catalogs). Also it might be easier to introduce new features or microservices without impacting the entire system.
+* **Enhanced flexibility** - microservices can be developed, deployed, and maintained independently, enabling faster iteration cycles. It means that different technologies can be used for different microservices based on the specific requirements (e.g., faster databases for product catalogs). Also it might be easier to introduce new features or microservices without impacting the entire system.
 
 At the same time microservices architecture has its own **disadvantages:**
 * **Deployment complexity** - managing deployments for multiple microservices can be challenging, especially with dependencies between services. That is why solutions, like containerization (Docker) and orchestration tools (Kubernetes) are often necessary for smooth deployments.
@@ -68,21 +68,20 @@ Moving further down the path of improving the architectural design, we can ident
 ![Serverless architecture](/images/3_serverless_architecture.png)
 
 Let's identify some examples of these functions applicable to the e-commerce applicaiton:
-* User authentication function - handles login, token generation, and password resets, triggered by API Gateway requests.
+* User authentication function - handles login, token generation, and password resets, triggered by the API Gateway requests.
 * Product recommendations function - generates personalized recommendations based on the user activity or product interactions.
 * Cart expiry cleanup function - automatically clears abandoned carts after a specified period of inactivity to maintain a clean database and free up resources.
-* Order notification function - sends notifications or emails when triggered by changes in order status.
+* Order notification function - sends notifications or emails when triggered by changes in the order status.
 * Payment processing function - processes payments when triggered by an order creation event from the order service.
 
-Please note the position of the serverless layer in the above diagram, as it does not fit between the microservices layer and the data layer. Instead, it acts as a supporting layer alongside the microservices. Serverless functions interact with both the API Gateway and the microservices as needed. They are triggered by specific events or requests (e.g., user actions, events from microservices like order creation, etc.) but do not replace or act as an intermediary layer between microservices and databases. The serverless Layer operates independently but works in conjunction with the microservices to handle specific tasks or processes. Serverless layer closely interacts with other components:
+Please note the position of the serverless layer in the above diagram, as it does not fit between the microservices layer and the data layer. Instead, it acts as a supporting layer alongside the microservices. Serverless functions interact with both the API Gateway and the microservices as needed. They are triggered by specific events or requests (e.g., user actions, events from microservices like order creation, etc.) but do not replace or act as an intermediary layer between microservices and databases. The serverless layer operates independently but works in conjunction with the microservices to handle specific tasks or processes. Serverless layer closely interacts with other components:
 * **With the API Gateway** - serverless functions can be triggered directly by the API Gateway for specific functions such as user authentication or other event-driven workflows.
 * **With Microservices** - serverless functions can respond to events emitted by the microservices (e.g., an order completion event triggers an order notification function).
-* **With Data Layer** - serverless functions can directly access data storage (e.g., reading/writing to databases) if needed, but this is typically done for event-driven tasks or isolated operations.
+* **With Data Layer** - serverless functions can directly access data storage (e.g., reading/writing to databases) if needed, but this is typically done for the event-driven tasks or isolated operations.
 
 **The key benefits of the serverless architecture are:**
 * **Scalability** - serverless functions automatically scale based on demand, accommodating spikes in traffic without manual intervention.
-* **Cost efficiency** - only pay for what you use, as serverless functions are charged based on the number of executions and duration.
-Ideal for tasks with unpredictable or intermittent usage patterns.
+* **Cost efficiency** - only pay for what you use, as serverless functions are charged based on the number of executions and duration. Serverless architecture is ideal for tasks with unpredictable or intermittent usage patterns.
 * **Reduced operational management** - serverless functions eliminate the need to manage infrastructure, patch servers, or handle OS-level configurations, provides faster deployment times for specific functionalities.
 
 **Disadvantages of the serverless architecture:**
@@ -92,9 +91,7 @@ Ideal for tasks with unpredictable or intermittent usage patterns.
 * **Complex integration** - using serverless alongside microservices can lead to more complex integrations and workflows that must be carefully designed to ensure efficient communication and data flow.
 * **Dependency management** - handling dependencies (e.g., libraries) in serverless functions requires packaging them correctly and may lead to larger deployment artifacts.
 
-As we can see, microservices allow more granular control over long-running processes and stateful applications. They offer flexibility to use different technology stacks and can be easily containerized. Serverless emphasizes simplicity for specific tasks and reduces infrastructure management 
-
-In general, introducing serverless architecture can help to optimize resource usage, cost, and operational complexity, but might not be suitable for all application components due to state limitations and execution constraints.
+As we can see, microservices allow more granular control over long-running processes and stateful applications. They offer flexibility to use different technology stacks and can be easily containerized. Serverless emphasizes simplicity for specific tasks and reduces infrastructure management. In general, introducing serverless architecture can help to optimize resource usage, cost, and operational complexity, but might not be suitable for all application components due to state limitations and execution constraints.
 
 ## Comparison between the monolithic, microservices and serverless architectures
 
@@ -104,19 +101,19 @@ After reviewing specifics of each of the architectural styles, let's make a comp
 **Monolithic Architecture:**
 * Pros: easy to scale vertically by adding more resources (CPU, memory) to the server hosting the application.
 * Cons: Limited horizontal scalability as it involves replicating the entire application for every instance, leading to inefficient resource usage.
-**Use Cases:** Best suited for applications with predictable and stable loads but not ideal for high-growth, high-traffic applications.
+**Use cases:** Best suited for applications with predictable and stable loads but not ideal for high-growth, high-traffic applications.
 
 **Microservices Architecture:**
 * Pros: each microservice can be independently scaled based on its unique load requirements. This leads to the optimized resource utilization.
 * Cons: more complex to manage due to service orchestration, monitoring, and inter-service communication.
-**Use Cases:** Suitable for large-scale applications with multiple services that require independent scaling and for applications with varying workloads across different functionalities.
+**Use cases:** Suitable for large-scale applications with multiple services that require independent scaling and for applications with varying workloads across different functionalities.
 
 **Serverless Architecture:**
 * Pros: automatically scales with demand; no manual intervention needed for resource allocation. Ideal for workloads with variable demand, including unpredictable traffic spikes.
 * Cons: cold start latency may occur if functions are inactive for a while.
 **Use cases:** Excellent for applications with highly variable or unpredictable traffic and for components that need to handle periodic spikes (e.g., seasonal sales).
 
-**2. Development complexity:**
+**2. Development complexity**
 **Monolithic Architecture:**
 * Pros: initially it is simpler to develop as the codebase is centralized. Easier for smaller teams to work on and understand.
 * Cons: as the codebase grows, the application becomes harder to manage and test.
@@ -132,7 +129,7 @@ After reviewing specifics of each of the architectural styles, let's make a comp
 * Cons: statelessness of serverless functions can complicate stateful workflows. Managing multiple functions can become cumbersome if there are a large number of functions and dependencies.
 **Use cases:** Well-suited for developing isolated, event-driven functionalities or rapid prototyping.
 
-**3. Deployment:**
+**3. Deployment**
 **Monolithic Architecture:**
 * Pros: easier to deploy as a single unit with minimal dependencies.
 * Cons: even small changes require the entire application to be redeployed.
@@ -148,25 +145,23 @@ After reviewing specifics of each of the architectural styles, let's make a comp
 * Cons: deployment limits and versioning need careful attention.
 **Use cases:** Suitable for frequent and isolated updates with quick deployments.
 
-**4. Maintenance:**
+**4. Maintenance**
 **Monolithic Architecture:**
 * Pros: maintenance is simpler with a single codebase and uniformity across the application.
-* Cons: as complexity grows, maintaining monolithic applications becomes challenging due to tight coupling.
+* Cons: as complexity grows, maintaining monolithic applications becomes challenging due to the tight coupling.
 **Use cases:** Ideal for simpler applications that can be maintained by a small team.
 
 **Microservices Architecture:**
-* Pros: individual services are easier to maintain, upgrade, and replace.
-Bug fixes and feature additions can be localized to specific services.
+* Pros: individual services are easier to maintain, upgrade, and replace; bug fixes and feature additions can be localized to specific services.
 * Cons: requires distributed monitoring, logging, and debugging.
 **Use cases:** Suitable for applications that evolve quickly and require modular maintenance.
 
 **Serverless Architecture:**
-* Pros: reduced infrastructure management (handled by cloud providers).
-Maintenance focuses on code and logic rather than server upkeep.
+* Pros: reduced infrastructure management (handled by cloud providers); maintenance focuses on code and logic rather than server upkeep.
 * Cons: monitoring and debugging distributed serverless functions can be challenging.
 **Use cases:** Best for applications where reducing infrastructure maintenance is a priority.
 
-**5. Cost implications:**
+**5. Cost implications**
 **Monolithic Architecture:**
 * Pros: lower initial cost as only one server is typically required.
 * Cons: high scaling costs due to inefficient resource utilization.
