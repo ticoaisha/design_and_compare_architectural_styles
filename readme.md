@@ -17,7 +17,8 @@ High-level architecture diagram is represented by the following **layers:**
 * **Business logic / back-end layer (application server)** built with Node.js, Python (Django/Flask), or another web framework. This layer handles business logic: user authentication, cart operations, product management, etc., as well as APIs for data fetching and processing.
 * **Data interface layer (database)** could be a relational database (e.g., PostgreSQL, MySQL) or a NoSQL database (e.g., MongoDB). It stores user information, products, orders, cart data, etc.
 
-This architectural design has its own advantages and disadvantages, as follows:
+This architectural design has its own advantages and disadvantages, as follows.
+
 **Advantages of the monolithic architecture:**
 * **Simplicity** - simple architecture allows for a quick development and is easy to understand for new developers.
 * **Uniformity** - a consistent data flow across layers makes it easier to maintain and debug.
@@ -98,94 +99,99 @@ As we can see, microservices allow more granular control over long-running proce
 After reviewing specifics of each of the architectural styles, let's make a comparison between them concentrating on certain key aspects, such as scalability, development complexity, deployment, maintenance, and cost implications.
 
 **1. Scalability**
-**Monolithic Architecture:**
+
+**Monolithic architecture:**
 * Pros: easy to scale vertically by adding more resources (CPU, memory) to the server hosting the application.
 * Cons: Limited horizontal scalability as it involves replicating the entire application for every instance, leading to inefficient resource usage.
 
 **Use cases:** Best suited for applications with predictable and stable loads but not ideal for high-growth, high-traffic applications.
 
-**Microservices Architecture:**
+**Microservices architecture:**
 * Pros: each microservice can be independently scaled based on its unique load requirements. This leads to the optimized resource utilization.
 * Cons: more complex to manage due to service orchestration, monitoring, and inter-service communication.
 
 **Use cases:** Suitable for large-scale applications with multiple services that require independent scaling and for applications with varying workloads across different functionalities.
 
-**Serverless Architecture:**
+**Serverless architecture:**
 * Pros: automatically scales with demand; no manual intervention needed for resource allocation. Ideal for workloads with variable demand, including unpredictable traffic spikes.
 * Cons: cold start latency may occur if functions are inactive for a while.
 
 **Use cases:** Excellent for applications with highly variable or unpredictable traffic and for components that need to handle periodic spikes (e.g., seasonal sales).
 
 **2. Development complexity**
-**Monolithic Architecture:**
+
+**Monolithic architecture:**
 * Pros: initially it is simpler to develop as the codebase is centralized. Easier for smaller teams to work on and understand.
 * Cons: as the codebase grows, the application becomes harder to manage and test.
 
 **Use cases:** Best suited for small teams and projects with straightforward, well-defined functionality.
 
-**Microservices Architecture:**
+**Microservices architecture:**
 * Pros: easier to manage code changes and enhancements as each service is self-contained, enabling parallel development across teams.
 * Cons: requires coordination between different services, making development more complex. Service dependencies need careful management to avoid breaking changes.
 
 **Use cases:** Ideal for large teams and complex projects that can benefit from modular development and where teams specialize in different domains.
 
-**Serverless Architecture:**
+**Serverless architecture:**
 * Pros: simplifies the development of specific tasks or event-driven workflows, as developers focus on business logic rather than infrastructure.
 * Cons: statelessness of serverless functions can complicate stateful workflows. Managing multiple functions can become cumbersome if there are a large number of functions and dependencies.
 
 **Use cases:** Well-suited for developing isolated, event-driven functionalities or rapid prototyping.
 
 **3. Deployment**
-**Monolithic Architecture:**
+
+**Monolithic architecture:**
 * Pros: easier to deploy as a single unit with minimal dependencies.
 * Cons: even small changes require the entire application to be redeployed.
 
 **Use cases:** Good for applications with infrequent updates.
 
-**Microservices Architecture:**
+**Microservices architecture:**
 * Pros: services can be deployed independently, reducing downtime.
 * Cons: deployment orchestration and service discovery require sophisticated tools (e.g., Kubernetes).
 
 **Use cases:** Best for projects with frequent updates and different release cycles for different components.
 
-**Serverless Architecture:**
+**Serverless architecture:**
 * Pros: simplifies deployments; functions can be deployed independently without affecting other parts of the system.
 * Cons: deployment limits and versioning need careful attention.
 
 **Use cases:** Suitable for frequent and isolated updates with quick deployments.
 
 **4. Maintenance**
-**Monolithic Architecture:**
+
+**Monolithic architecture:**
 * Pros: maintenance is simpler with a single codebase and uniformity across the application.
 * Cons: as complexity grows, maintaining monolithic applications becomes challenging due to the tight coupling.
 **Use cases:** Ideal for simpler applications that can be maintained by a small team.
 
-**Microservices Architecture:**
+**Microservices architecture:**
 * Pros: individual services are easier to maintain, upgrade, and replace; bug fixes and feature additions can be localized to specific services.
 * Cons: requires distributed monitoring, logging, and debugging.
 
 **Use cases:** Suitable for applications that evolve quickly and require modular maintenance.
 
-**Serverless Architecture:**
+**Serverless architecture:**
 * Pros: reduced infrastructure management (handled by cloud providers); maintenance focuses on code and logic rather than server upkeep.
 * Cons: monitoring and debugging distributed serverless functions can be challenging.
 
 **Use cases:** Best for applications where reducing infrastructure maintenance is a priority.
 
 **5. Cost implications**
-**Monolithic Architecture:**
+
+**Monolithic architecture:**
 * Pros: lower initial cost as only one server is typically required.
 * Cons: high scaling costs due to inefficient resource utilization.
 
 **Use cases:** Suitable for low-budget projects with stable traffic patterns.
 
-**Microservices Architecture:**
+**Microservices architecture:**
 * Pros: more cost-effective scaling, as only the necessary services are scaled.
 * Cons: increased operational costs due to the complexity of managing many services.
 
 **Use cases:** Best for projects with high traffic and large user bases where selective scaling matters.
 
-**Serverless Architecture:**
+**Serverless architecture:**
 * Pros: pay-as-you-go model reduces costs for applications with variable usage, no costs for idle services.
 * Cons: high-volume applications may incur unexpected costs if usage is not monitored.
 
